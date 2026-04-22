@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumior Studio – Beleza Que Ilumina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8A6B2A;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --white: #F5F0E8;
+    --gray: #888;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,168,76,.15);
+  }
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    letter-spacing: .3em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-logo span { font-size: .6rem; display: block; letter-spacing: .5em; color: var(--gold-dim); margin-top: -2px; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Lato', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'Cinzel', serif;
+    font-size: .7rem;
+    letter-spacing: .2em;
+    padding: .6rem 1.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    transition: background .3s, color .3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 5vw;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,168,76,.12) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(201,168,76,.05) 0%, transparent 60%),
+      var(--black);
+  }
+  .hero-particles {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(201,168,76,.6) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: .12;
+    animation: drift 20s linear infinite;
+  }
+  @keyframes drift { from { background-position: 0 0; } to { background-position: 60px 60px; } }
+
+  .hero-content { position: relative; z-index: 2; }
+  .hero-crown {
+    font-size: 3rem; color: var(--gold); line-height: 1;
+    animation: fadeDown .8s ease both;
+    margin-bottom: .5rem;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: var(--gold);
+    line-height: .95;
+    animation: fadeDown .9s .1s ease both;
+  }
+  .hero-studio {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    letter-spacing: .7em;
+    color: var(--gold-dim);
+    margin: .4rem 0 1.5rem;
+    animation: fadeDown 1s .2s ease both;
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--white);
+    opacity: .85;
+    margin-bottom: 2.5rem;
+    animation: fadeDown 1s .3s ease both;
+  }
+  .hero-services {
+    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+    animation: fadeDown 1s .4s ease both;
+  }
+  .hero-services span {
+    font-size: .7rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,.3);
+    padding: .4rem 1rem;
+  }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Cinzel', serif;
+    font-size: .8rem;
+    letter-spacing: .2em;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: background .3s, transform .3s;
+    animation: fadeDown 1s .5s ease both;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: .6rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: .8rem;
+    letter-spacing: .2em;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: background .3s;
+    animation: fadeDown 1s .55s ease both;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,.1); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: .4rem;
+    font-size: .6rem; letter-spacing: .3em; color: var(--gold-dim);
+    animation: fadeDown 1.2s .8s ease both;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 0 auto 3rem;
+    max-width: 300px;
+    color: var(--gold-dim);
+    font-size: .7rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .divider::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+
+  /* ── SECTION BASE ── */
+  section { padding: 8rem 5vw; }
+  .section-label {
+    font-size: .65rem; letter-spacing: .5em; color: var(--gold);
+    text-transform: uppercase; text-align: center; margin-bottom: .8rem;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--gray);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    line-height: 1.7;
+  }
+
+  /* ── PROBLEMA ── */
+  #problema { background: var(--dark); }
+  .problema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .problema-card {
+    border: 1px solid rgba(201,168,76,.15);
+    padding: 2.5rem 1.8rem;
+    text-align: center;
+    position: relative;
+    transition: border-color .3s, transform .3s;
+  }
+  .problema-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .problema-icon {
+    font-size: 2.5rem; margin-bottom: 1rem;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,.4));
+  }
+  .problema-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: .8rem;
+  }
+  .problema-card p { font-size: .85rem; color: var(--gray); line-height: 1.7; }
+  .problema-cta-bar {
+    text-align: center;
+    margin-top: 4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--white);
+  }
+  .problema-cta-bar em { color: var(--gold); font-style: italic; }
+
+  /* ── SERVIÇOS ── */
+  #servicos { background: var(--black); }
+  .servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .servico-card {
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,.1);
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: border-color .4s;
+    cursor: default;
+  }
+  .servico-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(201,168,76,.07) 0%, transparent 70%);
+    opacity: 0; transition: opacity .4s;
+  }
+  .servico-card:hover::before { opacity: 1; }
+  .servico-card:hover { border-color: rgba(201,168,76,.5); }
+  .servico-icon {
+    font-size: 3rem; display: block; margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(201,168,76,.5));
+  }
+  .servico-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: .85rem;
+    letter-spacing: .3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .servico-card p { font-size: .85rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── PUBLICO ── */
+  #publico { background: var(--dark); }
+  .publico-wrapper {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center;
+  }
+  .publico-left .perfil-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+  }
+  .perfil-item {
+    border: 1px solid rgba(201,168,76,.15);
+    padding: 1.5rem;
+    transition: border-color .3s;
+  }
+  .perfil-item:hover { border-color: var(--gold); }
+  .perfil-item .icon { font-size: 1.8rem; margin-bottom: .6rem; display: block; }
+  .perfil-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: .65rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+  .perfil-item p { font-size: .8rem; color: var(--gray); line-height: 1.6; }
+  .publico-right { text-align: center; }
+  .publico-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--white);
+    line-height: 1.5;
+    border-left: 2px solid var(--gold);
+    padding-left: 2rem;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .publico-quote em { color: var(--gold); font-style: italic; }
+  .publico-tagline {
+    font-size: .75rem; letter-spacing: .25em; color: var(--gold-dim);
+    text-transform: uppercase; text-align: left;
+  }
+
+  /* ── COMO FUNCIONA ── */
+  #funciona { background: var(--black); }
+  .steps {
+    display: flex; gap: 0;
+    max-width: 1100px; margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .step {
+    flex: 1; min-width: 160px;
+    text-align: center;
+    padding: 2rem 1rem;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '···';
+    position: absolute; right: -1rem; top: 3rem;
+    color: var(--gold-dim); font-size: 1.2rem; letter-spacing: .2em;
+  }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin: 0 auto 1.2rem;
+    position: relative;
+    transition: background .3s;
+  }
+  .step:hover .step-num { background: var(--gold); color: var(--black); }
+  .step-icon { font-size: 1.5rem; display: block; margin-bottom: .8rem; }
+  .step h3 {
+    font-family: 'Cinzel', serif;
+    font-size: .65rem;
+    letter-spacing: .15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .step p { font-size: .78rem; color: var(--gray); line-height: 1.6; }
+  .pagamento-info {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(201,168,76,.2);
+    max-width: 500px;
+    margin: 3rem auto 0;
+  }
+  .pagamento-info p { font-size: .8rem; color: var(--gray); }
+  .pagamento-info span { color: var(--gold); }
+
+  /* ── DIFERENCIAIS ── */
+  #diferenciais { background: var(--dark); }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .diff-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.5rem;
+    border: 1px solid rgba(201,168,76,.1);
+    transition: border-color .3s, background .3s;
+  }
+  .diff-item:hover { border-color: rgba(201,168,76,.4); background: rgba(201,168,76,.03); }
+  .diff-item .icon { font-size: 1.6rem; flex-shrink: 0; }
+  .diff-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: .7rem;
+    letter-spacing: .15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: .3rem;
+  }
+  .diff-item p { font-size: .8rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── FIDELIZAÇÃO ── */
+  #fidelizacao { background: var(--black); }
+  .fidelizacao-wrapper {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+  }
+  .fidelizacao-card {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,.25);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .fidelizacao-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .fidelizacao-dots {
+    display: flex; gap: .5rem; justify-content: center; margin-bottom: 2rem;
+  }
+  .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    transition: background .3s;
+  }
+  .dot.filled { background: var(--gold); }
+  .fidelizacao-card p { font-size: .8rem; color: var(--gray); font-style: italic; }
+  .beneficios-list { list-style: none; }
+  .beneficios-list li {
+    display: flex; align-items: center; gap: .8rem;
+    padding: .9rem 0;
+    border-bottom: 1px solid rgba(201,168,76,.08);
+    font-size: .85rem;
+    color: var(--white);
+  }
+  .beneficios-list li:last-child { border-bottom: none; }
+  .beneficios-list .b-icon { color: var(--gold); font-size: 1.2rem; }
+
+  /* ── DIVULGACAO ── */
+  #divulgacao { background: var(--dark); }
+  .redes-wrapper {
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .redes-list {
+    display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem;
+  }
+  .rede-item {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.2rem 2rem;
+    border: 1px solid rgba(201,168,76,.15);
+    font-size: .85rem;
+    color: var(--white);
+    transition: border-color .3s, background .3s;
+  }
+  .rede-item:hover { border-color: var(--gold); background: rgba(201,168,76,.04); }
+  .rede-item .icon { font-size: 1.4rem; }
+
+  /* ── POSICIONAMENTO ── */
+  #posicionamento { background: var(--black); }
+  .pos-wrapper {
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .pos-checkmarks {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-bottom: 3rem; text-align: left;
+  }
+  .pos-check {
+    display: flex; align-items: center; gap: .8rem;
+    font-size: .9rem; color: var(--white);
+    padding: .8rem 1rem;
+    border: 1px solid rgba(201,168,76,.1);
+  }
+  .pos-check span { color: var(--gold); font-size: 1.1rem; }
+  .pos-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: var(--gold);
+    margin-top: 1rem;
+  }
+
+  /* ── CTA FINAL ── */
+  #cta {
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,.12) 0%, transparent 70%), var(--dark);
+    text-align: center;
+    padding: 8rem 5vw;
+  }
+  #cta .section-title { font-size: clamp(2rem, 5vw, 4rem); color: var(--gold); }
+  #cta p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gray);
+    margin: 1rem 0 3rem;
+  }
+  .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,.15);
+    padding: 3rem 5vw;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: .3em;
+  }
+  .footer-logo span { font-size: .55rem; display: block; letter-spacing: .5em; color: var(--gold-dim); }
+  footer p { font-size: .75rem; color: var(--gold-dim); letter-spacing: .15em; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+    .publico-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+    .fidelizacao-wrapper { grid-template-columns: 1fr; }
+    .pos-checkmarks { grid-template-columns: 1fr; }
+    .step:not(:last-child)::after { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">LUMIOR<span>— STUDIO —</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#funciona">Como Funciona</a></li>
+    <li><a href="#fidelizacao">Fidelização</a></li>
+    <li><a href="#cta">Contato</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">Agendar</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles"></div>
+  <div class="hero-content">
+    <div class="hero-crown">♛</div>
+    <h1 class="hero-title">LUMIOR</h1>
+    <p class="hero-studio">STUDIO</p>
+    <p class="hero-tagline">Beleza que ilumina · Cuidamos da sua beleza completa <em style="color:var(--gold)">em um só lugar.</em> ♡</p>
+    <div class="hero-services">
+      <span>Tranças</span>
+      <span>Unhas</span>
+      <span>Maquiagem</span>
+      <span>Estética Facial</span>
+    </div>
+    <div>
+      <a href="https://wa.me/5511992835389" target="_blank" class="btn-gold">✦ Agendar Agora</a>
+      <a href="#servicos" class="btn-outline">Ver Serviços</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- O PROBLEMA -->
+<section id="problema">
+  <p class="section-label reveal">02 · O Problema</p>
+  <h2 class="section-title reveal">Entendemos seus desafios</h2>
+  <p class="section-sub reveal">Entendemos os desafios que muitas mulheres enfrentam quando o assunto é cuidar da beleza.</p>
+  <div class="problema-grid">
+    <div class="problema-card reveal">
+      <span class="problema-icon">⏰</span>
+      <h3>Falta de Tempo</h3>
+      <p>A rotina corrida faz com que muitas mulheres não tenham tempo para se cuidar como gostariam.</p>
+    </div>
+    <div class="problema-card reveal">
+      <span class="problema-icon">📍</span>
+      <h3>Precisam ir em Vários Lugares</h3>
+      <p>Para fazer cabelo, unhas, maquiagem e tratamentos, é preciso se deslocar para lugares diferentes.</p>
+    </div>
+    <div class="problema-card reveal">
+      <span class="problema-icon">★</span>
+      <h3>Não Encontram Qualidade</h3>
+      <p>Muitas vezes o atendimento não é bom e os serviços não atendem às expectativas.</p>
+    </div>
+    <div class="problema-card reveal">
+      <span class="problema-icon">😞</span>
+      <h3>Resultado: Cansaço + Estresse</h3>
+      <p>Tudo isso gera cansaço, frustração e falta de praticidade no dia a dia.</p>
+    </div>
+  </div>
+  <p class="problema-cta-bar reveal">O Lumior Studio veio para <em>mudar essa realidade.</em> ♡</p>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <p class="section-label reveal">03 · A Solução</p>
+  <h2 class="section-title reveal">Nossos Serviços</h2>
+  <p class="section-sub reveal">Um espaço completo onde você encontra tudo que precisa para realçar sua beleza e autoestima!</p>
+  <div class="servicos-grid">
+    <div class="servico-card reveal">
+      <span class="servico-icon">🪢</span>
+      <h3>Tranças</h3>
+      <p>Tranças com estilo, perfeição e durabilidade para realçar sua beleza única.</p>
+    </div>
+    <div class="servico-card reveal">
+      <span class="servico-icon">💅</span>
+      <h3>Unhas</h3>
+      <p>Unhas lindas e bem cuidadas para você brilhar em todos os momentos.</p>
+    </div>
+    <div class="servico-card reveal">
+      <span class="servico-icon">🪄</span>
+      <h3>Maquiagem</h3>
+      <p>Realçamos sua beleza com técnicas que valorizam o que você tem de melhor.</p>
+    </div>
+    <div class="servico-card reveal">
+      <span class="servico-icon">✨</span>
+      <h3>Estética Facial</h3>
+      <p>Cuidado e revitalização para sua pele ficar radiante e saudável.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:4rem;" class="reveal">
+    <p style="font-size:.7rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;">Aqui você também encontra</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;max-width:800px;margin:0 auto;">
+      <span style="font-size:.8rem;color:var(--gray);border:1px solid rgba(201,168,76,.15);padding:.6rem 1.2rem;">🏆 Profissionais qualificadas</span>
+      <span style="font-size:.8rem;color:var(--gray);border:1px solid rgba(201,168,76,.15);padding:.6rem 1.2rem;">♡ Atendimento personalizado</span>
+      <span style="font-size:.8rem;color:var(--gray);border:1px solid rgba(201,168,76,.15);padding:.6rem 1.2rem;">🌿 Ambiente acolhedor</span>
+      <span style="font-size:.8rem;color:var(--gray);border:1px solid rgba(201,168,76,.15);padding:.6rem 1.2rem;">✦ Produtos de alta qualidade</span>
+      <span style="font-size:.8rem;color:var(--gray);border:1px solid rgba(201,168,76,.15);padding:.6rem 1.2rem;">🛡 Tudo em um só lugar</span>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--white);margin-top:2.5rem;">Beleza sem complicação. Confiança que ilumina. ♡</p>
+  </div>
+</section>
+
+<!-- PÚBLICO -->
+<section id="publico" style="background:var(--dark);">
+  <p class="section-label reveal">04 · Nossa Cliente</p>
+  <h2 class="section-title reveal">Quem é Nossa Cliente?</h2>
+  <p class="section-sub reveal">Entendemos quem é nossa cliente para oferecer serviços que atendem suas necessidades e superam suas expectativas.</p>
+  <div class="publico-wrapper">
+    <div class="publico-left">
+      <div class="perfil-grid">
+        <div class="perfil-item reveal">
+          <span class="icon">👩‍💼</span>
+          <h4>18 a 45 Anos</h4>
+          <p>Jovens adultas que buscam praticidade e qualidade nos cuidados com a beleza.</p>
+        </div>
+        <div class="perfil-item reveal">
+          <span class="icon">💼</span>
+          <h4>Trabalham ou Estudam</h4>
+          <p>Rotina corrida e precisam de soluções que otimizem seu tempo.</p>
+        </div>
+        <div class="perfil-item reveal">
+          <span class="icon">♡</span>
+          <h4>Se Preocupam com Aparência</h4>
+          <p>Valorizam o autocuidado e entendem que se sentir bem aumenta a autoestima.</p>
+        </div>
+        <div class="perfil-item reveal">
+          <span class="icon">📅</span>
+          <h4>Querem Praticidade</h4>
+          <p>Buscam um lugar completo que ofereça vários serviços em um só espaço.</p>
+        </div>
+      </div>
+    </div>
+    <div class="publico-right reveal">
+      <div class="publico-quote">
+        Nossa cliente quer: <em>se sentir bonita, confiante e poderosa todos os dias!</em> ♡
+      </div>
+      <p class="publico-tagline">No Lumior Studio, cada detalhe é pensado para você. Você é única, e seu brilho nos inspira!</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="funciona">
+  <p class="section-label reveal">05 · Como Funciona</p>
+  <h2 class="section-title reveal">O Atendimento</h2>
+  <p class="section-sub reveal">Nosso atendimento é pensado para ser prático, rápido e oferecer a melhor experiência para você.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <span class="step-icon">💬</span>
+      <h3>Atendimento Presencial ou Online</h3>
+      <p>Fale conosco pelo WhatsApp ou Instagram para tirar dúvidas e agendar seu horário.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <span class="step-icon">📅</span>
+      <h3>Agendamento Fácil</h3>
+      <p>Escolha o serviço, a data e o horário que for melhor para você. Simples e rápido!</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <span class="step-icon">⏱</span>
+      <h3>Horário Marcado</h3>
+      <p>Compareça no horário agendado e aproveite um atendimento personalizado e exclusivo.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <span class="step-icon">💳</span>
+      <h3>Formas de Pagamento</h3>
+      <p>Aceitamos Pix, dinheiro, cartão de débito e crédito para sua maior comodidade.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <span class="step-icon">♡</span>
+      <h3>Você Linda, Sempre!</h3>
+      <p>Saia renovada, confiante e pronta para brilhar! Sua satisfação é nossa maior prioridade.</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--white);margin-top:3rem;" class="reveal">Fácil, rápido e organizado para você ter <span style="color:var(--gold)">a melhor experiência!</span> ♡</p>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais" style="background:var(--dark);">
+  <p class="section-label reveal">06 · Preço &amp; Atendimento</p>
+  <h2 class="section-title reveal">Por Que Nos Escolher?</h2>
+  <p class="section-sub reveal">Aqui, você encontra qualidade, cuidado e preços justos em um atendimento que faz a diferença!</p>
+  <div class="diff-grid">
+    <div class="diff-item reveal">
+      <span class="icon">🏷</span>
+      <div>
+        <h4>Preços Acessíveis</h4>
+        <p>Tabela justa e transparente, pensada para caber no seu bolso.</p>
+      </div>
+    </div>
+    <div class="diff-item reveal">
+      <span class="icon">🏆</span>
+      <div>
+        <h4>Serviços de Qualidade</h4>
+        <p>Profissionais qualificadas e produtos de alta qualidade para realçar sua beleza com segurança.</p>
+      </div>
+    </div>
+    <div class="diff-item reveal">
+      <span class="icon">♡</span>
+      <div>
+        <h4>Atendimento Personalizado</h4>
+        <p>Cada cliente é única! Escutamos você para entender suas necessidades e superar expectativas.</p>
+      </div>
+    </div>
+    <div class="diff-item reveal">
+      <span class="icon">💬</span>
+      <div>
+        <h4>Resposta Rápida no WhatsApp</h4>
+        <p>Atendimento ágil e humanizado para tirar dúvidas, agendar e te deixar informada sempre.</p>
+      </div>
+    </div>
+    <div class="diff-item reveal">
+      <span class="icon">📅</span>
+      <div>
+        <h4>Agendamento Fácil e Flexível</h4>
+        <p>Horários que se adaptam à sua rotina, para mais comodidade e praticidade no seu dia a dia.</p>
+      </div>
+    </div>
+    <div class="diff-item reveal">
+      <span class="icon">🛡</span>
+      <div>
+        <h4>Transparência</h4>
+        <p>Sem taxas escondidas. Ambiente seguro, limpo e acolhedor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIDELIZAÇÃO -->
+<section id="fidelizacao">
+  <p class="section-label reveal">09 · Fidelização</p>
+  <h2 class="section-title reveal">Que Faz Você Voltar Sempre!</h2>
+  <p class="section-sub reveal">Aqui você é valorizada sempre! ♡</p>
+  <div class="fidelizacao-wrapper">
+    <div class="fidelizacao-card reveal">
+      <h3>CARTÃO FIDELIDADE</h3>
+      <div class="fidelizacao-dots">
+        <div class="dot filled"></div>
+        <div class="dot filled"></div>
+        <div class="dot filled"></div>
+        <div class="dot filled"></div>
+        <div class="dot filled"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <p>Acumule visitas e ganhe benefícios exclusivos. Sua lealdade tem recompensas!</p>
+    </div>
+    <ul class="beneficios-list reveal">
+      <li><span class="b-icon">♛</span> Cartão fidelidade</li>
+      <li><span class="b-icon">🏷</span> Desconto para clientes fixas</li>
+      <li><span class="b-icon">🎁</span> Brindes especiais</li>
+      <li><span class="b-icon">★</span> Promoções exclusivas para nossas clientes</li>
+    </ul>
+  </div>
+</section>
+
+<!-- DIVULGAÇÃO -->
+<section id="divulgacao" style="background:var(--dark);">
+  <p class="section-label reveal">07 · Onde Nos Encontrar</p>
+  <h2 class="section-title reveal">Acompanhe a Lumior</h2>
+  <p class="section-sub reveal">Sempre com novidades e promoções!</p>
+  <div class="redes-wrapper">
+    <div class="redes-list">
+      <div class="rede-item reveal">
+        <span class="icon">📷</span>
+        <div>
+          <strong style="font-size:.8rem;letter-spacing:.15em;color:var(--gold);">INSTAGRAM (PRINCIPAL)</strong>
+          <p style="font-size:.8rem;color:var(--gray);margin-top:.2rem;">Nosso canal principal de comunicação</p>
+        </div>
+      </div>
+      <div class="rede-item reveal">
+        <span class="icon">🔄</span>
+        <div>
+          <strong style="font-size:.8rem;letter-spacing:.15em;color:var(--gold);">ANTES E DEPOIS</strong>
+          <p style="font-size:.8rem;color:var(--gray);margin-top:.2rem;">Transformações reais das nossas clientes</p>
+        </div>
+      </div>
+      <div class="rede-item reveal">
+        <span class="icon">▶</span>
+        <div>
+          <strong style="font-size:.8rem;letter-spacing:.15em;color:var(--gold);">VÍDEOS DE TRANSFORMAÇÃO</strong>
+          <p style="font-size:.8rem;color:var(--gray);margin-top:.2rem;">Processo completo dos nossos serviços</p>
+        </div>
+      </div>
+      <div class="rede-item reveal">
+        <span class="icon">⏱</span>
+        <div>
+          <strong style="font-size:.8rem;letter-spacing:.15em;color:var(--gold);">STORIES COM HORÁRIOS</strong>
+          <p style="font-size:.8rem;color:var(--gray);margin-top:.2rem;">Disponibilidade e promoções em tempo real</p>
+        </div>
+      </div>
+      <div class="rede-item reveal">
+        <span class="icon">👥</span>
+        <div>
+          <strong style="font-size:.8rem;letter-spacing:.15em;color:var(--gold);">INDICAÇÕES DE CLIENTES</strong>
+          <p style="font-size:.8rem;color:var(--gray);margin-top:.2rem;">Depoimentos e recomendações reais</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSICIONAMENTO -->
+<section id="posicionamento">
+  <p class="section-label reveal">08 · Posicionamento</p>
+  <h2 class="section-title reveal">Por Que Escolher o Lumior Studio?</h2>
+  <div class="pos-wrapper">
+    <div class="pos-checkmarks reveal">
+      <div class="pos-check"><span>✦</span> Tudo em um só lugar</div>
+      <div class="pos-check"><span>✦</span> Atendimento personalizado</div>
+      <div class="pos-check"><span>✦</span> Ambiente acolhedor</div>
+      <div class="pos-check"><span>✦</span> Foco na autoestima</div>
+    </div>
+    <p class="pos-quote reveal">"Beleza que ilumina sua confiança."</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta">
+  <p class="section-label reveal">Agende Já</p>
+  <h2 class="section-title reveal">Sinta-se Linda, Confiante e Poderosa!</h2>
+  <p class="reveal">Sua beleza é nossa prioridade. Entre em contato e agende seu horário agora.</p>
+  <div class="cta-buttons reveal">
+    <a href="https://wa.me/5511992835389" target="_blank" class="btn-gold">💬 Agendar pelo WhatsApp</a>
+    <a href="#servicos" class="btn-outline">Ver Todos os Serviços</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LUMIOR<span>— STUDIO — BELEZA QUE ILUMINA</span></div>
+  <p>© 2025 Lumior Studio · Todos os direitos reservados</p>
+  <p style="color:var(--gold-dim);font-size:.7rem;letter-spacing:.15em;">Sua beleza, nosso cuidado. ♡</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Fidelidade dots hover
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    dot.addEventListener('mouseenter', () => {
+      dots.forEach((d, j) => {
+        d.style.background = j <= i ? 'var(--gold)' : '';
+        d.style.borderColor = j <= i ? 'var(--gold)' : '';
+      });
+    });
+  });
+</script>
+</body>
+</html>
